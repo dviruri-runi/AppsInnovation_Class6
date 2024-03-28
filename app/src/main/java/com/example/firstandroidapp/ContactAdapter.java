@@ -1,10 +1,13 @@
 package com.example.firstandroidapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -41,6 +44,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         holder.Avatar.setImageResource(contact.Avatar);
         holder.Name.setText(contact.Name);
         holder.Email.setText(contact.Email);
+        holder.Card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),ContactActivity.class);
+                intent.putExtra("contact",contact);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        (Activity) v.getContext(),
+                        holder.Card,
+                        "cardTransition"
+                );
+                v.getContext().startActivity(intent,options.toBundle());
+            }
+        });
     }
 
     @Override

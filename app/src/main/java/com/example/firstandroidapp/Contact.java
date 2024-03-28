@@ -1,6 +1,8 @@
 package com.example.firstandroidapp;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
 
     public int Avatar;
     public String Name;
