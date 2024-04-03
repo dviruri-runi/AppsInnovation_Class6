@@ -30,6 +30,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         Contacts.add(new Contact(R.drawable.avatar8,"Contact8","contact8@gmail.com"));
     }
 
+    public void AddContact(Contact c) {
+        Contacts.add(c);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
