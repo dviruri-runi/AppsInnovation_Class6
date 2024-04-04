@@ -35,6 +35,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void DeleteContact(int pos) {
+        Contacts.remove(pos);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
