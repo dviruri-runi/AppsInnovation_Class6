@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- If targeting Android 10 (API level 29) or above, use this permission for scoped storage -->
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

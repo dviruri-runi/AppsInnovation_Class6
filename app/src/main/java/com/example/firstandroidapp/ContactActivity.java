@@ -2,6 +2,7 @@ package com.example.firstandroidapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ public class ContactActivity extends AppCompatActivity {
         TextView Email = findViewById(R.id.email);
         ImageView Avatar = findViewById(R.id.avatar);
 
-        Avatar.setImageResource(contact.Avatar);
+        Avatar.setImageURI(Uri.parse(contact.Avatar));
         Name.setText(contact.Name);
         Email.setText(contact.Email);
 
