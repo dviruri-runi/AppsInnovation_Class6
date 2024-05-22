@@ -53,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,AddContactActivity.class);
-                activityResultLauncher.launch(i);
+                throw new RuntimeException("Test Crash!");
+                //Intent i = new Intent(MainActivity.this,AddContactActivity.class);
+                //activityResultLauncher.launch(i);
 
                 //startActivity(i);
 

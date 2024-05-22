@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+
 public class ContactActivity extends AppCompatActivity {
 
     @Override
@@ -22,7 +25,8 @@ public class ContactActivity extends AppCompatActivity {
         TextView Email = findViewById(R.id.email);
         ImageView Avatar = findViewById(R.id.avatar);
 
-        Avatar.setImageURI(Uri.parse(contact.Avatar));
+        //Avatar.setImageURI(Uri.parse(contact.Avatar));
+        Glide.with(this).load(contact.Avatar).into(Avatar);
         Name.setText(contact.Name);
         Email.setText(contact.Email);
 

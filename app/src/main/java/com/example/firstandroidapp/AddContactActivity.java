@@ -62,7 +62,7 @@ public class AddContactActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText name = findViewById(R.id.name);
                 EditText email = findViewById(R.id.email);
-                Contact c = new Contact(CurrentImage,name.getText().toString(),email.getText().toString());
+                Contact c = new Contact("https://static.vecteezy.com/system/resources/previews/001/840/618/original/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",name.getText().toString(),email.getText().toString());
                 Intent i = new Intent();
                 i.putExtra("contact",c);
                 setResult(1,i);
