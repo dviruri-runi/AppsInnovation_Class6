@@ -20,11 +20,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.content.ContentValues;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import java.io.File;
 import java.io.IOException;
 
 public class AddContactActivity extends AppCompatActivity {
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     ImageView addPhoto;
     int REQUEST_PERMISSIONS_CODE = 1;
     private ActivityResultLauncher<Uri> takePictureLauncher;
@@ -62,11 +69,24 @@ public class AddContactActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText name = findViewById(R.id.name);
                 EditText email = findViewById(R.id.email);
-                Contact c = new Contact("https://static.vecteezy.com/system/resources/previews/001/840/618/original/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",name.getText().toString(),email.getText().toString());
-                Intent i = new Intent();
-                i.putExtra("contact",c);
-                setResult(1,i);
-                finish();
+                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                StorageReference fileRef = storageRef.child(CurrentImage.getPath());
+                fileRef.putFile(CurrentImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Contact c = new Contact(fileRef.getDownloadUrl().toString(),name.getText().toString(),email.getText().toString());
+                        db.collection("Contacts").document(c.ID).set(c.getAsMap());
+                        Intent i = new Intent();
+                        i.putExtra("contact",c);
+                        setResult(1,i);
+                        finish();
+                    }
+                });
+
+
+
+
+
             }
         });
     }

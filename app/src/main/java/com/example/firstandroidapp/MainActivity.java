@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                throw new RuntimeException("Test Crash!");
-                //Intent i = new Intent(MainActivity.this,AddContactActivity.class);
-                //activityResultLauncher.launch(i);
+                //throw new RuntimeException("Test Crash!");
+                Intent i = new Intent(MainActivity.this,AddContactActivity.class);
+                activityResultLauncher.launch(i);
 
                 //startActivity(i);
 
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleData(Intent data) {
-        Bundle b = data.getExtras();
-        Contact contact = (Contact)b.getSerializable("contact");
-        adapter.AddContact(contact);
+        //Bundle b = data.getExtras();
+        //Contact contact = (Contact)b.getSerializable("contact");
+        //adapter.AddContact(contact);
     }
 }

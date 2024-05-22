@@ -8,13 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -35,6 +38,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            Contacts.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Contact c = new Contact(document.get("Avatar").toString(),document.get("Name").toString(),document.get("Email").toString(),document.get("ID").toString());
                                 Contacts.add(c);
@@ -43,6 +47,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
                         }
                     }
                 });
+        db.collection("Contacts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                Contacts.clear();
+                for (QueryDocumentSnapshot document : value) {
+                    Contact c = new Contact(document.get("Avatar").toString(),document.get("Name").toString(),document.get("Email").toString(),document.get("ID").toString());
+                    Contacts.add(c);
+                }
+                notifyDataSetChanged();
+            }
+        });
     }
 
     public void AddContact(Contact c) {
@@ -51,8 +66,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
     }
 
     public void DeleteContact(int pos) {
-        Contacts.remove(pos);
-        notifyDataSetChanged();
+        Contact c = Contacts.get(pos);
+        db.collection("Contacts").document(c.ID).delete();
+        //Contacts.remove(pos);
+        //notifyDataSetChanged();
     }
 
     @NonNull

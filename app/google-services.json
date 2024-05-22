@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "521534460209",
-    "project_id": "contacts-18717",
-    "storage_bucket": "contacts-18717.appspot.com"
+    "project_number": "768943751503",
+    "project_id": "contacts-2-46847",
+    "storage_bucket": "contacts-2-46847.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:521534460209:android:71d1049ae24a253a5ee010",
+        "mobilesdk_app_id": "1:768943751503:android:17df437c016b1bae99853a",
         "android_client_info": {
           "package_name": "com.example.firstandroidapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDLCgvfXxCK5Gc1ww9LOD3F6KFOZmbQaKA"
+          "current_key": "AIzaSyD78-biaUmPAhRqcmsOENHGV71Gimd88WM"
         }
       ],
       "services": {

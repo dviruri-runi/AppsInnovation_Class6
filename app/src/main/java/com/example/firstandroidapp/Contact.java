@@ -6,6 +6,8 @@ import com.google.firebase.Timestamp;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Contact implements Serializable {
 
@@ -26,6 +28,15 @@ public class Contact implements Serializable {
         Name = n;
         Email = e;
         ID = i;
+    }
+
+    public Map<String,String> getAsMap() {
+        Map<String,String> map = new HashMap<>();
+        map.put("ID",ID);
+        map.put("Avatar",Avatar);
+        map.put("Name", Name);
+        map.put("Email",Email);
+        return map;
     }
 
 }
