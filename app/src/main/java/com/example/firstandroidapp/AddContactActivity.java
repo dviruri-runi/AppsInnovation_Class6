@@ -74,12 +74,17 @@ public class AddContactActivity extends AppCompatActivity {
                 fileRef.putFile(CurrentImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Contact c = new Contact(fileRef.getDownloadUrl().toString(),name.getText().toString(),email.getText().toString());
-                        db.collection("Contacts").document(c.ID).set(c.getAsMap());
-                        Intent i = new Intent();
-                        i.putExtra("contact",c);
-                        setResult(1,i);
-                        finish();
+                        fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Contact c = new Contact(uri.toString(),name.getText().toString(),email.getText().toString());
+                                db.collection("Contacts").document(c.ID).set(c.getAsMap());
+                                Intent i = new Intent();
+                                i.putExtra("contact",c);
+                                setResult(1,i);
+                                finish();
+                            }
+                        });
                     }
                 });
 
